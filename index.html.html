@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantum Networking & Telecom Security — LinkedIn Post</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f4f2ee;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem 1rem 4rem;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.08);
+    max-width: 600px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Hero */
+  .hero {
+    background: #0a0f1e;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,200,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,255,0.07) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+
+  .hero-glow1 {
+    position: absolute;
+    width: 340px; height: 340px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,180,255,0.13) 0%, transparent 70%);
+    top: -100px; right: -80px;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(100,60,220,0.15) 0%, transparent 70%);
+    bottom: -40px; left: 10px;
+  }
+
+  .hero-inner { position: relative; z-index: 2; }
+
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: #00c8ff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 2px;
+    background: #00c8ff;
+    border-radius: 1px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 30px;
+    line-height: 1.22;
+    color: #eef4ff;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #55d4ff;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: rgba(190,215,255,0.65);
+    line-height: 1.65;
+    max-width: 460px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 1.25rem;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,200,255,0.28);
+    color: rgba(195,220,255,0.8);
+    background: rgba(0,200,255,0.07);
+  }
+
+  /* Post body */
+  .body { padding: 1.5rem 1.75rem; }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid #e8e6e1;
+    margin-bottom: 1.25rem;
+  }
+
+  .avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0a4a8a 0%, #1a3060 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    color: #60d4ff;
+    flex-shrink: 0;
+    border: 1.5px solid rgba(0,160,255,0.3);
+  }
+
+  .author-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 2px;
+  }
+
+  .author-role {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .hook {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 19px;
+    font-style: italic;
+    color: #1a1a1a;
+    border-left: 3px solid #00a8d8;
+    padding-left: 1rem;
+    margin-bottom: 1.1rem;
+    line-height: 1.45;
+  }
+
+  p {
+    font-size: 14.5px;
+    line-height: 1.78;
+    color: #3c3c3c;
+    margin-bottom: 0.9rem;
+  }
+
+  p strong { color: #1a1a1a; font-weight: 600; }
+
+  hr {
+    border: none;
+    border-top: 1px solid #e8e6e1;
+    margin: 1.2rem 0;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  /* Fault lines grid */
+  .fault-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 1.2rem;
+  }
+
+  .fault-card {
+    background: #f7f5f0;
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid #ccc;
+  }
+  .fault-card.red   { border-left-color: #d94040; }
+  .fault-card.amber { border-left-color: #d48c10; }
+  .fault-card.teal  { border-left-color: #0da875; }
+  .fault-card.blue  { border-left-color: #2882cc; }
+
+  .fault-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+
+  .fault-desc {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* Stats */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 1.1rem;
+  }
+
+  .stat {
+    background: #f7f5f0;
+    border-radius: 8px;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 28px;
+    color: #0090bf;
+    display: block;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: #666;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  /* Timeline */
+  .timeline {
+    padding-left: 28px;
+    position: relative;
+    margin-bottom: 1.2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: #ddd;
+  }
+
+  .tl-item { position: relative; margin-bottom: 1rem; }
+  .tl-item:last-child { margin-bottom: 0; }
+
+  .tl-dot {
+    position: absolute;
+    left: -24px; top: 4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 2px solid #0090bf;
+    background: #fff;
+  }
+  .tl-dot.filled { background: #0090bf; }
+  .tl-dot.warn   { border-color: #c07800; }
+  .tl-dot.danger { border-color: #c03030; background: #c03030; }
+
+  .tl-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #0090bf;
+    margin-bottom: 3px;
+  }
+  .tl-label.warn   { color: #c07800; }
+  .tl-label.danger { color: #c03030; }
+
+  .tl-text {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* CTA box */
+  .cta-box {
+    background: #0a0f1e;
+    border-radius: 10px;
+    padding: 1.25rem 1.4rem;
+    margin: 1.2rem 0 1rem;
+    border: 1px solid rgba(0,200,255,0.18);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-glow {
+    position: absolute;
+    width: 140px; height: 140px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,180,255,0.14) 0%, transparent 70%);
+    top: -40px; right: 20px;
+  }
+
+  .cta-q {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 17px;
+    color: #eef4ff;
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+    position: relative; z-index: 2;
+  }
+
+  .cta-sub {
+    font-size: 13px;
+    color: rgba(170,200,255,0.6);
+    margin-bottom: 0.8rem;
+    position: relative; z-index: 2;
+  }
+
+  .choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative; z-index: 2;
+  }
+
+  .choice {
+    font-size: 11.5px;
+    font-weight: 500;
+    padding: 5px 13px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,200,255,0.35);
+    color: #55d4ff;
+    background: rgba(0,200,255,0.06);
+    cursor: default;
+  }
+
+  .hashtags {
+    font-size: 13px;
+    color: #2580c0;
+    line-height: 2.1;
+  }
+  .hashtags span { margin-right: 8px; }
+
+  /* Footer */
+  .footer {
+    background: #f0ede7;
+    border-top: 1px solid #e0ddd8;
+    padding: 1rem 1.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .footer-note {
+    font-size: 11.5px;
+    color: #888;
+  }
+
+  .reactions {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #666;
+  }
+  .reactions span { cursor: default; }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- Hero Banner -->
+  <div class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow1"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-inner">
+      <div class="eyebrow">Quantum Networking × Telecom Security</div>
+      <h1>The encryption securing<br>your network today<br>has an <em>expiration date.</em></h1>
+      <p class="hero-sub">Quantum computers won't ask permission before they arrive. Are telecom operators racing fast enough?</p>
+      <div class="tags">
+        <span class="tag">Quantum Networking</span>
+        <span class="tag">Post-Quantum Cryptography</span>
+        <span class="tag">Telecom Security</span>
+        <span class="tag">5G / 6G</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <div class="author">
+      <div class="avatar">TQ</div>
+      <div>
+        <div class="author-name">Telecom &amp; AI Strategist</div>
+        <div class="author-role">Quantum Networks · 5G/6G Architecture · AI Security</div>
+      </div>
+    </div>
+
+    <p class="hook">"Harvest now, decrypt later" — nation-state actors are already collecting encrypted telecom data, waiting for the quantum moment.</p>
+
+    <p>Most telecom operators run their security on <strong>RSA-2048 and ECC</strong> — algorithms that a sufficiently powerful quantum computer will shatter in hours, not years. The uncomfortable truth: <strong>that moment is closer than most boardrooms believe.</strong></p>
+
+    <p>Quantum networking changes everything — not just by threatening existing cryptography, but by offering a fundamentally new security paradigm: <strong>Quantum Key Distribution (QKD)</strong>, where eavesdropping is physically impossible, not just computationally hard.</p>
+
+    <hr>
+
+    <div class="section-label">The Four Fault Lines</div>
+
+    <div class="fault-grid">
+      <div class="fault-card red">
+        <div class="fault-title">🔴 Harvest Attacks</div>
+        <p class="fault-desc">Adversaries archive encrypted traffic today to decrypt post-quantum. Your 2024 data may be exposed by 2030.</p>
+      </div>
+      <div class="fault-card amber">
+        <div class="fault-title">🟡 Signalling Exposure</div>
+        <p class="fault-desc">SS7 &amp; Diameter protocols have no quantum-safe equivalents yet. Billions of handshakes daily, all at risk.</p>
+      </div>
+      <div class="fault-card teal">
+        <div class="fault-title">🟢 QKD Opportunity</div>
+        <p class="fault-desc">Photon-based key exchange makes interception detectable. Long-haul quantum links are being tested now.</p>
+      </div>
+      <div class="fault-card blue">
+        <div class="fault-title">🔵 PQC Migration</div>
+        <p class="fault-desc">NIST finalized post-quantum standards in 2024. Telecom vendors are only beginning to integrate them.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="section-label">Where the Industry Stands</div>
+
+    <div class="stat-row">
+      <div class="stat">
+        <span class="stat-num">~5</span>
+        <p class="stat-label">years to cryptographically relevant quantum computers (est.)</p>
+      </div>
+      <div class="stat">
+        <span class="stat-num">8+</span>
+        <p class="stat-label">years typical large-scale telecom infrastructure cycle</p>
+      </div>
+      <div class="stat">
+        <span class="stat-num">&lt;15%</span>
+        <p class="stat-label">of tier-1 operators with active PQC migration plans</p>
+      </div>
+    </div>
+
+    <p>The math is brutal: <strong>infrastructure cycles outlast the threat timeline.</strong> Operators who start their post-quantum migration in 2027 may not finish before the first quantum attacks are viable.</p>
+
+    <hr>
+
+    <div class="section-label">The Quantum Security Roadmap</div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot filled"></div>
+        <div class="tl-label">Now — 2025</div>
+        <p class="tl-text">NIST PQC standards published. QKD pilot networks active in China, EU, and Japan. Most operators: still in assessment phase.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot warn"></div>
+        <div class="tl-label warn">2026 — 2028 · The Critical Window</div>
+        <p class="tl-text">Crypto-agility must be embedded into 5G core and RAN. Hybrid classical + quantum-safe encryption should be the new baseline. Hardware refresh cycles are now or never.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot danger"></div>
+        <div class="tl-label danger">2029+ · Point of No Return</div>
+        <p class="tl-text">Operators without quantum-safe architecture face regulatory exposure, customer data liability, and potential network compromise from state-level quantum adversaries.</p>
+      </div>
+    </div>
+
+    <hr>
+
+    <p>The good news: <strong>quantum networking is not just a threat — it's a structural advantage for operators who move first.</strong> QKD-secured backbone links, satellite-based quantum key distribution, and AI-driven crypto-agility frameworks are real, deployable technologies — not science fiction.</p>
+
+    <p>The operators who lead won't be those with the largest budgets. They'll be the ones who treat <strong>quantum readiness as a board-level mandate today</strong>, not a CTO footnote for 2028.</p>
+
+    <div class="cta-box">
+      <div class="cta-glow"></div>
+      <div class="cta-q">How quickly can telecom operators modernize before quantum-scale threats go mainstream?</div>
+      <p class="cta-sub">Drop your take below — I read every response. 👇</p>
+      <div class="choices">
+        <span class="choice">We'll miss the window</span>
+        <span class="choice">Early movers will lead</span>
+        <span class="choice">What are the barriers?</span>
+        <span class="choice">Explain QKD deeper</span>
+      </div>
+    </div>
+
+    <div class="hashtags">
+      <span>#QuantumNetworking</span>
+      <span>#TelecomSecurity</span>
+      <span>#PostQuantumCryptography</span>
+      <span>#5G</span>
+      <span>#QKD</span>
+      <span>#CyberSecurity</span>
+      <span>#TelecomInnovation</span>
+      <span>#AI</span>
+    </div>
+
+  </div>
+
+  <!-- Footer bar -->
+  <div class="footer">
+    <span class="footer-note">LinkedIn Post · Quantum Networking &amp; Telecom Security</span>
+    <div class="reactions">
+      <span>👍 Like</span>
+      <span>💬 Comment</span>
+      <span>🔁 Repost</span>
+      <span>📤 Share</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
